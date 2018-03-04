@@ -1,4 +1,4 @@
-[{
+module.exports = [{
         "name": "Will",
         "photo": "https://goo.gl/images/NL1FxB",
         "scores": [
