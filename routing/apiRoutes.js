@@ -9,26 +9,29 @@ module.exports = function(app) {
         res.json(friendsData);
     });
     app.post("/api/friends", function(req, res) {
-
-        // friendsData
         // compare data and user req
-        // friendsData.forEach((people) => `${people.scores}`);
+
         for (i = 0; i < friendsData.length; i++) {
             // console.log(friendsData[i].scores)
+
             for (j = 0; j < friendsData[i].scores.length; j++) {
                 var people = req.body.scores;
-                console.log(`${people} ${req.body.name}`)
-                    // if (friendsData[i].scores[j] != req.body.scores[j]) {
-                let difference = friendsData[i].scores
-                    .filter(x => !people.includes(x))
-                    .concat(people.filter(x => !friendsData[i].scores.includes(x)));
-                console.log(difference);
+                // if (friendsData[i].scores[j] != req.body.scores[j]) {
+                var matchingNumbers = Math.abs(+friendsData[i].scores[j] - +req.body.scores[j]);
+                var mnumarray = []
+                var matchValue = mnumarray.reduce((a, b) => a + b, 0);
+                if (matchingNumbers > 0) {
+                    mnumarray.push(matchingNumbers)
+                    console.log(`${friendsData[i].name} ${mnumarray}`);
+
+                }
+                // console.log(mnumarray);
                 // }
-                //     console.log(req.body.scores[j])
             }
         }
-        // req.body.name
-        // console.log(req.body);
+        // var matchValue = mnumarray.reduce((a, b) => a + b, 0);
+        // console.log(matchValue)
+        // console.log(mnumarray);
         friendsData.push(req.body);
         res.json("friendsData");
     });
